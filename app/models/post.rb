@@ -7,19 +7,19 @@ class Post < ActiveRecord::Base
    message: "%{value} is not a valid category" }
    validate :is_clickbait?
 
-CLICKBAIT_PATTERNS = [
+   CLICKBAIT_PATTERNS = [
   /Won't Believe/i,
   /Secret/i,
   /Top [0-9]*/i,
   /Guess/i
 ]
 
-def is_clickbait?
-  if CLICKBAIT_PATTERNS.none? { |pat| pat.match title }
-    errors.add(:title, "must be clickbait")
+  def is_clickbait?
+    if CLICKBAIT_PATTERNS.none? { |pat| pat.match title }
+      errors.add(:title, "must be clickbait")
+    end
   end
 end
-
 # All posts have a title
 # Post content is at least 250 characters long
 # Post summary is a maximum of 250 characters
